@@ -1,0 +1,63 @@
+{% extends 'ged_app/main.html' %}
+
+{% block content %}
+
+<style>
+
+  #pos{
+    margin : 8%; 
+  }
+
+  tr th{
+    font-weight: bold;
+    font-size: 17px;
+  }
+</style>
+
+<div  id="pos">
+  <!-- <h1>Liste des documents</h1> -->
+  <div class="view view-cascade gradient-card-header blue-gradient narrower py-2 mx-4 mb-3 mt-5 d-flex justify-content-between align-items-center ">
+    <h4 class="white-text mx-5 ">
+      <span style="vertical-align: inherit;">
+        <span style="vertical-align: inherit;"> Liste de tous les documents</span>
+      </span>
+    </h4>
+  </div>
+  <div class="px-4">
+    <div class="table-responsive">
+      <table class="table table-hover mb-0 ">
+        <thead class="thead-striped">
+          <tr>
+            <th class="th-lg">Titre</th>
+            <th class="th-lg">Publié par</th>
+            <th class="th-lg">Niveau</th>
+            <th class="th-lg">Filière</th>
+            <th class="th-lg">Date de publication</th>
+            <th class="th-lg">fichier</th>
+          </tr>
+        </thead>
+        
+        {% for doc in docs %}
+          <tr>
+            <td>{{doc.titre}}</td>
+            <td>{{doc.author}}</td>
+            <td>{{doc.classe_doc}}</td>
+            <td>{{doc.genie_doc}}</td>
+            <td>{{doc.date}}</td>
+            
+            {% if doc.fichier  %}
+            <td><a  href="{{ doc.fichier.url }}" target="_blank" ><span class="btn btn-teal btn-rounded btn-sm m-0  waves-effect waves-light">Télécharger</span></a></td>   
+            {% endif %}
+              
+          
+
+          </tr>
+          
+        {% endfor %}
+      </table>
+  </div>
+  </div>
+  </div>
+
+
+ {% endblock %}

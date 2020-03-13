@@ -1,0 +1,137 @@
+{% load static  %}
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+	<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>S'inscrire</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Free HTML5 Template by FreeHTML5.co" />
+	<meta name="keywords" content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive" />
+	<meta name="author" content="FreeHTML5.co" />
+
+ 
+  	<!-- Facebook and Twitter integration 
+	<meta property="og:title" content=""/>
+	<meta property="og:image" content=""/>
+	<meta property="og:url" content=""/>
+	<meta property="og:site_name" content=""/>
+	<meta property="og:description" content=""/>
+	<meta name="twitter:title" content="" />
+	<meta name="twitter:image" content="" />
+	<meta name="twitter:url" content="" />
+    <meta name="twitter:card" content="" />
+    -->
+
+	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+	<link rel="shortcut icon" href="favicon.ico">
+
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,300' rel='stylesheet' type='text/css'>
+	
+	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %} ">
+	<link rel="stylesheet" href="{% static 'css/animate.css' %} ">
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+	<link rel="stylesheet" href="{% static 'css/style1.css' %}">
+
+	<!-- Modernizr JS -->
+	<script src="js/modernizr-2.6.2.min.js"></script>
+	<!-- FOR IE9 below -->
+	<!--[if lt IE 9]>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
+
+	</head>
+	<body class="style">
+
+		<div class="container">
+			<div class="row">
+				<div class="col-md-1 text-center">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6 col-md-push-6">
+					
+
+					<!-- Start Sign In Form -->
+					<form method="POST" action="#" class="fh5co-form animate-box" data-animate-effect="fadeInRight">
+                        {% csrf_token %}
+
+						<h2>S'inscrire</h2>
+						<div class="form-group">
+							<div class="alert alert-success" role="alert">KLEMA  Hint</div>
+						</div>
+						<div class="form-group"> 
+                            {{form.username}} 
+                        </div>
+						<div class="form-group">
+                            {{form.first_name}} 
+						</div>
+						<div class="form-group">
+                            {{form.email}} 
+						</div>
+						<div class="form-group">                            
+                            {{form.password1}}
+						</div>
+						<div class="form-group">							
+                            {{form.password2}}
+                        </div>
+                        {{forms.errors}}
+						<div class="form-group">
+							<p> déjà un compte ? <a href="{% url 'connecter' %}">Se connecter</a></p>
+						</div>
+						<div class="form-group">
+							<input type="submit" value="S'inscrire" class="btn btn-primary" style="width: 150px;">
+						</div>
+					</form>
+					<!-- END Sign In Form -->
+
+
+				</div>
+			</div>
+			<div class="row" style="padding-top: 50px; clear: both; font-size : 20px; font-weight : bold; color: #fff;">
+				<div class="col-md-12 text-center"  ><p><small><a href="#">&copy; Ecole Polytechnique de THIES / GIT </a></small></p></div>
+			</div>
+		</div>
+	
+	<!-- jQuery -->
+	<script src="{% static 'js/jquery.min.js' %}"></script>
+	<!-- Bootstrap -->
+	<script src="{% static 'js/bootstrap.min.js' %}"></script>
+	<!-- Placeholder -->
+	<script src="{% static 'js/jquery.placeholder.min.js' %}"></script>
+	<!-- Waypoints -->
+	<script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+	<!-- Main JS -->
+    <script src="{% static 'js/main.js' %}"></script>
+    
+    <script>
+
+        var form_fields = document.getElementsByTagName('input')
+		form_fields[1].placeholder='Pseudo..';
+		form_fields[2].placeholder='Prenom et Nom...';
+		form_fields[3].placeholder='Email...';
+		form_fields[4].placeholder='Mot de passe...';
+        form_fields[5].placeholder='Confirmer mot de passe...';
+        
+
+
+		for (var field in form_fields){	
+            if (form_fields[field].type != 'submit'){ 
+                form_fields[field].className += ' form-control'
+                form_fields[field].style.fontFamily = 'Verdana, Geneva, sans-serif';
+                form_fields[field].style.fontSize = '15px';
+            }
+		}
+
+    </script>
+
+
+	</body>
+</html>
+
+
+
+

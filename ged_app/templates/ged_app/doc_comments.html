@@ -1,0 +1,134 @@
+{% extends 'ged_app/main.html' %}
+
+{% block content %}
+
+
+<style>
+
+    #iframe{
+        margin-left : 15%;
+        margin-top : 5px;
+        margin-bottom : 7px;
+
+    }
+
+
+    #parent{
+        border: 8px solid #e2e0e0b2;
+        background-color: #f1f8fad3;
+        margin-top: 55px;
+    }
+
+    u{
+        font-weight: bold;
+        text-transform: uppercase;
+        font-size: 11px;
+        margin-right: 30px;
+        padding-left:10px;
+    } 
+    
+    #cmt{
+        width: 75%;
+        margin: 10%;
+       /*border: solid #898989 0.5px;*/
+        padding:20px;
+       /* border-radius: 10px;*/
+        
+    }
+
+
+    #ncm{
+        background-color: rgb(32, 121, 177);
+        margin-bottom:10px;
+        text-align: center;
+        color:white;
+        font-weight: bold;
+    }
+
+    span{
+        font-size:17px;
+        font-weight:bold;
+    }
+
+    
+
+</style>
+
+
+<body style="margin-top: 5%;">
+    <div id='parent'>
+        <u>Description:</u><span>{{ doc.text }} </span> <br/>
+    <br><u>Titre:</u> <span style="text-transform: uppercase;">{{ doc.titre }}</span><br>
+    <br><img src="{{doc.author.photo_profile.url}}"  class="rounded-circle" style="max-width:10%;" > <span style="font-size:20px; font-weight:bold;"> {{doc.author}} </span>
+    <br><div class="btn btn-sm btn-red btn-rounded"> <span>{{ doc.genie_doc }} </span></div>
+    </div>
+    
+
+<div class="row" id = "iframe">
+ 
+    <embed type="application/pdf" width="70%" height="1000px" src="{{ doc.fichier.url }}"/>
+
+</div>
+
+
+<!--Commentaires-->
+<div id="cmt">
+    <div class="text-center my-5">
+        <h3 class="font-weight-bold">
+            <span class="badge blue">{{ comments.count }}</span> Commentaire{{ comments|pluralize }}  <i class="far fa-comments"></i>
+        </h3>
+    </div>
+    <div style="margin-bottom: 25px; border-bottom: solid 1px rgb(36, 83, 112)">
+        <form method="POST" action="{% url 'comments' pk=doc.pk %}">
+            {% csrf_token %}
+            {{ comment_form.as_p }}
+            <input type='submit' value='commenter' class="btn btn-sm btn-primary">
+        </form>
+    </div>   <div class='main-comment-section' style="margin-bottom:50%;">
+       
+        {% for comment in comments %}
+        <div style="border-top: solid 0.05px #c0c8c897; padding:5px;">
+
+            <small style="font-weight:bold;" class="waves-effect waves-light">  
+                <img src="{{comment.author_id.photo_profile.url}}"  class="rounded-circle waves-effect waves-light" alt="photo_profile" style=" max-width: 10%; max-height: 5%;  padding :0; ">
+                 {{ comment.author_id }} 
+                <span style='font-size:9px; font-style: italic; font-weight:normal;'> {{ comment.date_commentaire }} </span>
+            </small>
+            <p style="margin-left: 3%; ">{{ comment.contenu }} <button  type="button" name="button" class="reply-btn btn white" style="font-size:10px; font-weight:bold; padding:5px;color:#458de6;">
+            Repondre</button></p>
+
+
+        <div class="replied-comments container mt-0 ml-5" style="display: none;">
+            {% for reply in comment.repliques.all %}
+            
+            <small style="font-weight: bold;"><img src="{{reply.author_id.photo_profile.url}}"  class="rounded-circle" alt="photo_profile" style=" max-width: 5%; max-height: 5%;  padding :0; ">  {{ reply.author_id }} <span style='font-size:9px; font-style: italic; font-weight:normal;'> {{ reply.date_commentaire }} </span></small>
+            <p style="margin-left: 3%; font-size:12px; ">{{ reply.contenu }}</p>
+            {% endfor %}
+            
+            <div class = "form-group row">
+                <form method="POST" action="{% url 'comments' pk=doc.pk %}">
+                    {% csrf_token %}
+                    <input type="hidden" name= "comment_id" value = "{{ comment.id }}">
+                    {{ comment_form.as_p }}
+                    <input type='submit' value='valider' class="btn btn-sm btn-success" style=" width:auto; padding:3px;">
+                </form>
+            </div>
+        </div>
+        <br>
+
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+<!-- fin commentaires -->
+
+</body>
+
+
+
+
+
+
+
+{% endblock %}

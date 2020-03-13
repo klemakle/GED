@@ -1,0 +1,292 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Mon compte</title>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="{% static 'ecommerce/css/bootstrap.min.css' %}">
+  <!-- Material Design Bootstrap -->
+  <link rel="stylesheet" href="{% static 'ecommerce/css/mdb.min.css' %}">
+
+  <!-- Your custom styles (optional) -->
+  <style>
+    .card.card-cascade .view.gradient-card-header {
+            padding: 1.1rem 1rem;
+        }
+
+        .card.card-cascade .view {
+            box-shadow: 0 5px 12px 0 rgba(0, 0, 0, 0.2), 0 2px 8px 0 rgba(0, 0, 0, 0.19);
+        }
+
+        label{
+          font-size:15px;
+          padding:2px;
+          font-style:italic;
+          
+          color : #ada8ab;
+
+        }
+
+
+        select{
+          border : none;
+          color : #303031;
+        }
+
+        label[for='id_genie']{
+          margin-bottom:25px;
+        }
+
+        input[type='text'], input[type='number']{
+          text-align: center;
+          color : rgb(54, 51, 51);
+          margin-bottom: 20px;
+          margin-top: -20px;
+        }
+
+    </style>
+</head>
+
+<body class="fixed-sn white-skin">
+
+  <!-- Main Navigation -->
+  <header>
+
+
+    <!-- Navbar -->
+    <nav class="navbar fixed-top navbar-expand-lg scrolling-navbar double-nav">
+
+      <!-- SideNav slide-out button -->
+      <div class="float-left">
+        <a href="#" data-activates="slide-out" class="button-collapse"><i class="fas fa-bars"></i></a>
+      </div>
+
+      <!-- Breadcrumb -->
+      <div class="breadcrumb-dn mr-auto">
+        <p style="font-size: 20px; font-weight:bold;">{{user.eleve.name}}</p>
+      </div>
+
+      <!-- Navbar links -->
+      <ul class="nav navbar-nav nav-flex-icons ml-auto">
+
+        <!-- Dropdown -->
+        <li class="nav-item">
+          <a class="nav-link waves-effect" href="{% url 'page_eleve' %}"><i class="fas fa-home"></i> <span class="clearfix d-none d-sm-inline-block">Home</span></a> 
+          
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle waves-effect" href="#" id="userDropdown" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-user"></i> <span class="clearfix d-none d-sm-inline-block">Profile</span>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+            <a class="dropdown-item" href="{% url 'deconnecter'%}">deconnecter</a>
+            <a class="dropdown-item" href="#">Mon compte</a>
+          </div>
+        </li>
+
+      </ul>
+      <!-- Navbar links -->
+
+    </nav>
+    <!-- Navbar -->
+
+  </header>
+  <!-- Main Navigation -->
+
+  <!-- Main layout -->
+  <main>
+    <div class="container-fluid">
+
+      <!-- Section: Edit Account -->
+      <section class="section">
+        <!-- First row -->
+        <div class="row">
+          <!-- First column -->
+          <div class="col-lg-4 mb-4">
+
+            <!-- Card -->
+            <div class="card card-cascade narrower">
+
+              <!-- Card image -->
+              <div class="view view-cascade gradient-card-header mdb-color lighten-3">
+                <h5 class="mb-0 font-weight-bold"> Photo</h5>
+              </div>
+              <!-- Card image -->
+
+              <!-- Card content -->
+              <div class="card-body card-body-cascade text-center">
+                <img id="photo" src="{{request.user.eleve.photo_profile.url}}" alt="User Photo"  class="avatar img-circle img-thumbnail"/>
+
+                <p class="text-muted"><small>Modifier votre photo de profile </small></p>
+                <div class="row flex-center">
+                  <!--{{form.photo_profile}}-->
+                  <!--<button class="btn btn-info btn-rounded btn-sm">Upload New Photo</button><br>-->
+                
+                    <button class="btn btn-danger btn-rounded btn-sm" id="delete" type ='submit'>Delete</button>
+                </div>
+              </div>
+              <!-- Card content -->
+
+            </div>
+            <!-- Card -->
+
+          </div>
+          <!-- First column -->
+
+          <!-- Second column -->
+          <div class="col-lg-8 mb-4">
+
+            <!-- Card -->
+            <div class="card card-cascade narrower">
+
+              <!-- Card image -->
+              <div class="view view-cascade gradient-card-header mdb-color lighten-3">
+                <h5 class="mb-0 font-weight-bold">Votre Compte</h5>
+              </div>
+              <!-- Card image -->
+
+              <!-- Card content -->
+              <div class="card-body card-body-cascade text-center">
+
+                <!-- Edit Form -->
+            <form  class="form" action="#" id="registrationForm" enctype="multipart/form-data" method="POST" >
+                  {% csrf_token %}
+                    <div class="form-group">
+                      <div class="col-xs-12">
+                          {{form.as_p}}
+                      </div>
+                    </div>
+                  <!-- Fourth row -->
+                  <div class="row">
+                    <div class="col-md-12 text-center my-4">
+                      <input type="submit" value="Raffraichir données" class="btn btn-info btn-rounded">
+                    </div>
+                  </div>
+            </form>
+                <!-- Edit Form -->
+
+              </div>
+              <!-- Card content -->
+
+            </div>
+            <!-- Card -->
+
+          </div>
+          <!-- Second column -->
+
+        </div>
+        <!-- First row -->
+
+      </section>
+      <!-- Section: Edit Account -->
+
+    </div>
+
+  </main>
+  <!-- Main layout -->
+
+
+  <!-- SCRIPTS -->
+  <!-- JQuery -->
+  <script src="{% static 'ecommerce/js/jquery-3.4.1.min.js' %}"></script>
+  <!-- Bootstrap tooltips -->
+  <script type="text/javascript" src="{% static 'ecommerce/js/popper.min.js' %}"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript" src="{% static 'ecommerce/js/bootstrap.js' %}"></script>
+  <!-- MDB core JavaScript -->
+  <script type="text/javascript" src="{% static 'ecommerce/js/mdb.min.js' %}"></script>
+  <!-- Custom scripts -->
+  <script>
+    // SideNav Initialization
+    $(".button-collapse").sideNav();
+
+    var container = document.querySelector('.custom-scrollbar');
+    var ps = new PerfectScrollbar(container, {
+      wheelSpeed: 2,
+      wheelPropagation: true,
+      minScrollbarLength: 20
+    });
+
+  </script>
+
+  <script>
+    $(document).ready(function() {
+
+
+        var readURL = function(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+    
+                reader.onload = function (e) {
+                    $('.avatar').attr('src', e.target.result);
+                }
+        
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        
+    
+        $(".file-upload").on('change', function(){
+            readURL(this);
+        });
+    });
+</script>
+<script type="text/javascript">
+
+  var paras = document.getElementsByTagName('input');
+  var clear = document.querySelector("label[for=photo_profile-clear_id]");
+  var sup = document.getElementById('delete');
+  var photo = document.getElementById('photo');
+  var parcourir = paras[paras.length-1] ;
+  var nom_fichier_photo = parcourir.querySelector('a');
+
+  var lab = document.querySelectorAll('label')
+  for(var j in lab){
+    //lab[j].className += ' btn btn-sm btn-rounded ';
+  }
+
+  var sle = document.getElementsByTagName('select');
+  /*for(var i in sle){
+    sle[i].style.border = 'none'
+    sle[i].style.
+  }*/
+  
+  sup.addEventListener("click", function(){
+    
+    photo.setAttribute('src', "{%static '/images/user-default.png' %}")
+    nom_fichier_photo.href = "{%static '/images/user-default.png' %}"; 
+    nom_fichier_photo.innerHTML =  "user-default.png";
+  }, false);
+
+
+    for (var element in paras){
+        paras[element].style.height= '62px';
+        paras[element].style.fontFamily = 'Geneva, sans-serif';
+        paras[element].style.fontWeight = 'bold';
+        paras[element].style.border = '0';
+        paras[element].className += ' form-control'
+        
+    }
+
+    /*var liste = document.querySelectorAll('input[type=select]');
+
+    
+    for (var el in liste){
+      liste[el].style.border = '1px';
+  }*/
+
+
+    
+
+
+</script>
+</body>
+
+</html>

@@ -1,0 +1,103 @@
+
+
+{% extends 'ged_app/main.html' %}
+
+
+{% block content %}
+<h1>Publier des documents</h1>
+<style>
+    label{
+        font-size: 15px;
+    }
+
+    #koi{
+        margin-left: 350px;
+    }
+
+</style>
+
+
+<a href="{% url 'liste_doc' %}" class="btn btn-cyan waves-classic" style="margin-top:25px;"> liste des documents</a><br>
+<div class="row" id="koi">
+    <div class="col-lg-6  text-lg-center  shadow-lg p-3 mb-5 bg-white rounded">
+        <form method="POST" enctype="multipart/form-data" class="fh5co-form animate-box" role='form'>
+            {% csrf_token %}
+            <div class="md-form"> 
+                <input type="text" name="author" value="{{ user.eleve.name }}" id="id_author" disabled> 
+                <label class="p-1 mb-5 bg-blue text-vlue" for="id_author">Auteur  </label>
+            </div>
+            <div class="md-form"> 
+                <input type="text" name="titre" maxlength="100" required id='id_titre'   class="form-control">
+                <label class="p-0 mb-5 bg-white text-black" for="id_titre">Titre document </label>
+     
+            </div>
+            <div class="md-form"> 
+                        <!--<label class="p-1 mb-10 bg-info text-white">fichier : </label>-->
+                        <input type="file" name="fichier"  id="id_fichier" class="btn btn-blue-grey  btn-rounded" >
+            </div>
+            <div class="md-form"> 
+                <label class="p-1 mt-1 mb-8 btn peach-gradient  waves-effect waves-light text-white">Description</label><br>
+                <textarea name="text" cols="40" rows="10" maxlength="1000" required id="id_text" class="md-textarea form-control"  placeholder="tapez votre texte"></textarea>
+                 
+            </div>
+            <div class="form-group"> 
+                <label class="badge badge-danger text-wrap">Classe</label>
+                <select name="classe_doc" required id="id_classe_doc" >
+                    <option value selected> ------- </option>
+                    <option value="TC1">TC1</option>
+                    <option value="TC2">TC2</option>
+                    <option value="DIC1">DIC1</option>
+                    <option value="DIC2">DIC2</option>
+                    <option value="DIC3">DIC3</option>
+                </select>
+                
+            </div>
+            <div class="form-group"> 
+                <label class="badge badge-danger text-wrap">Génie</label>
+                <select name='genie_doc' required id='id_genie_doc'>
+                    <option value selected> ------- </option>
+                    <option value="GIT">Génie Informatique et Télécommunications</option>
+                    <option value="Génie Civil"> Génie Civil </option>
+                    <option value="Génie Electromécanique"> Génie Electro-Mécanique</option>
+                    <option value="Tronc Commun"> Tronc Commun </option>
+                </select>
+                
+            </div>
+            
+
+
+            <button type="submit" class="btn btn-primary btn-rounded" ><strong id="btn">Publier</strong> </button>
+        </form>
+    </div>
+</div>
+
+
+
+    <script src=" js/jquery.min.js"></script>
+	<!-- Bootstrap -->
+	<script src="js/bootstrap.min.js"></script>
+	<!-- Placeholder -->
+	<script src="js/jquery.placeholder.min.js"></script>
+	<!-- Waypoints -->
+	<script src="js/jquery.waypoints.min.js"></script>
+	<!-- Main JS -->
+    <script src="js/main.js"></script>
+    
+<script>
+
+    var liste = document.getElementsByTagName('input');
+    //var lab = document.querySelectorAll('div label');
+    var bouton = document.getElementById('btn');
+
+
+  
+
+    for (var el in liste){
+        liste[el].style.border = '1px';
+    }
+
+ 
+
+    bouton.style.fontWeight = 'bold';
+</script>
+{% endblock %}
