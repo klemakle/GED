@@ -32,7 +32,7 @@ def inscrire(request):
             return redirect('connecter')
 
     context = {'form' : form}
-    return render(request, 'ged_app/inscrire.html', context)
+    return render(request, 'ged_app/authentification/inscrire.html', context)
 
 
 
@@ -53,14 +53,14 @@ def connecter(request):
             messages.info(request, 'Pseudo ou Mot de passe incorrect')
 
     context = {}
-    return render (request, 'ged_app/connexion.html', context)
+    return render (request, 'ged_app/authentification/connexion.html', context)
 
 
 
 
 
 
-#page de l'eleve
+# controleur qui retourne la page d'accueil par défaut des utilisateurs
 @login_required(login_url='connecter')
 @allowed_users(allowed_roles=['Eleve'])
 def page_eleve(request):
@@ -78,7 +78,7 @@ def page_eleve(request):
 
 
     context = {'Document':d, 'question':question_form, 'q':qst}
-    return render(request, 'ged_app/homepage.html', context)
+    return render(request, 'ged_app/user/page_user.html', context)
 
 
 
@@ -96,7 +96,7 @@ def deconnecter(request):
 @compte_autorise
 def page(request):
     context = {}
-    return render(request, 'ged_app/accueil.html', context)
+    return render(request, 'ged_app/admin_deconnecte.html', context)
 
 
 
@@ -114,7 +114,7 @@ def user_param(request):
             form.save()
             return redirect('parametres')
     context = {'form':form}
-    return render(request, 'ged_app/basic.html', context)
+    return render(request, 'ged_app/user/params_user.html', context)
 
 
 
@@ -137,7 +137,7 @@ def upload_doc(request):
         docme.save()
         return redirect('liste_doc')
        
-    return render(request, 'ged_app/upload_doc.html')
+    return render(request, 'ged_app/documents/upload_doc.html')
 
 
 
@@ -146,7 +146,7 @@ def upload_doc(request):
 def liste_doc(request):
     doc = Document.objects.all()
     context = {'docs': doc}
-    return render (request, 'ged_app/liste_doc.html', context)
+    return render (request, 'ged_app/documents/liste_doc.html', context)
 
 
 
@@ -250,30 +250,29 @@ def comments(request, pk):
         'comments' : com,
         'comment_form':comment_form
         }
-    return render (request, 'ged_app/doc_comments.html', context)
+    return render (request, 'ged_app/documents/doc_comments.html', context)
 
 
 
 
-@login_required(login_url='connecter')
-def question(request):
-    question_form = QuestionForm()
-    if request.method == 'POST':
-        question_form = QuestionForm(request.POST)
-        content = request.POST.get('question')
-        comm = Question.objects.create(eleve_id=request.user.eleve,question = content)
-        comm.save()
-        return redirect('')
-    else :
-        question_form = QuestionForm()
-
-    context ={'question':question_form}
-    return render ( request, 'ged_app/poser_question.html', context)
-
+# @login_required(login_url='connecter')
+# def question(request):
+#     question_form = QuestionForm()
+#     if request.method == 'POST':
+#         question_form = QuestionForm(request.POST)
+#         content = request.POST.get('question')
+#         comm = Question.objects.create(eleve_id=request.user.eleve,question = content)
+#         comm.save()
+#         return redirect('')
+#     else :
+#         question_form = QuestionForm()
+#     context ={'question':question_form}
+#     return render ( request, 'ged_app/poser_question.html', context)
 
 
 
 
+#Controleur de reponses aux questions
 @login_required(login_url='connecter')
 def repondre(request, pk):
     quest = Question.objects.get(id= int(pk))
@@ -290,7 +289,7 @@ def repondre(request, pk):
             rep_form = ReponseForm()
 
     context = {'question': quest, 'rep_form':rep_form, 'reponse':rep}
-    return render(request, 'ged_app/repondre.html', context)
+    return render(request, 'ged_app/question/repondre.html', context)
 
 
 

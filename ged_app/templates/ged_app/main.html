@@ -6,7 +6,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>Main</title>
+  <!-- <title>{{titre}}</title> -->
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
   <!-- Bootstrap core CSS -->
@@ -20,15 +20,13 @@
       width: 100%;
     }
 
-   
   </style>
+
 </head>
 <!--<body class="homepage-v1 hidden-sn white-skin animated">-->
   <!-- Navigation -->
   <header>
-    <!-- Sidebar navigation -->
     <ul id="slide-out" class="side-nav custom-scrollbar">
-      <!-- phot_profile -->
       <li>
         <!--<div class="photo_profile-wrapper waves-light">-->
         <div class="logo-wrapper sn-ad-avatar-wrapper" style=" height:250px">
@@ -37,8 +35,6 @@
           </a>
         </div>
       </li>
-      <!-- photo_profile -->
-      <!-- Social -->
       <li>
         <ul class="social">
           <li>
@@ -59,8 +55,6 @@
           </li>
         </ul>
       </li>
-      <!-- Social -->
-      <!-- Search Form -->
       <li>
         <form class="search-form" role="search">
           <div class="form-group md-form mt-0 pt-1 waves-light">
@@ -68,8 +62,6 @@
           </div>
         </form>
       </li>
-      <!-- Search Form -->
-      <!-- Side navigation links -->
       <li>
         <ul class="collapsible collapsible-accordion">
           <li>
@@ -151,14 +143,10 @@
           </li>
         </ul>
       </li>
-      <!-- Side navigation links -->
       <div class="sidenav-bg mask-strong"></div>
     </ul>
-    <!-- Sidebar navigation -->
-    <!-- Navbar -->
     <nav class="navbar fixed-top navbar-expand-lg  navbar-light scrolling-navbar white">
       <div class="container">
-        <!-- SideNav slide-out button -->
         <div class="float-left mr-2">
           <a href="#" data-activates="slide-out" class="button-collapse">
             <i class="fas fa-bars"></i>
@@ -199,48 +187,48 @@
     </nav>
     <!-- Navbar -->
   </header>
-  {% block content %} 
-
-
-
-
-  {% endblock %}
-  <footer class="page-footer text-md-left stylish-color-dark " >
+  <div>
+    {% block content %} 
     
-    <!-- Copyright -->
-    <div class="footer-copyright py-3 text-center">
-      <div class="container-fluid">
-        © 2019 Copyright: <a href="#" target="_blank"> Ecole Polytechnique de Thies/ GIT </a>
-      </div>
+
+    {% endblock %}
+  </div>
+<footer class="page-footer text-md-left stylish-color-dark " >
+  
+  <div class="footer-copyright py-3 text-center">
+    <div class="container-fluid">
+      © 2019 Copyright: <a href="#" target="_blank"> Ecole Polytechnique de Thies/ GIT </a>
     </div>
-    <!-- Copyright -->
-  </footer>
+  </div>
+</footer>
 
 
-  <script type="text/javascript" src="{% static 'ecommerce/js/jquery-3.4.1.min.js' %}"></script>
-  <!-- Bootstrap tooltips -->
-  <script type="text/javascript" src="{% static 'ecommerce/js/popper.min.js' %}"></script>
-  <!-- Bootstrap core JavaScript -->
-  <script type="text/javascript" src="{% static 'ecommerce/js/bootstrap.min.js' %}">
-  </script>
-  <!-- MDB core JavaScript -->
-  <script type="text/javascript" src="{% static 'ecommerce/js/mdb.min.js' %}"></script>
-  <script type="text/javascript">
-    /* WOW.js init */
-    new WOW().init();
-    // Tooltips Initialization
-    $(function () {
-      $('[data-toggle="tooltip"]').tooltip()
-    })
-    // Material Select Initialization
-    $(document).ready(function () {
-      $('.mdb-select').material_select();
-    });
-    // SideNav Initialization
-    $(".button-collapse").sideNav();
+<script type="text/javascript" src="{% static 'ecommerce/js/jquery-3.4.1.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'ecommerce/js/popper.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'ecommerce/js/bootstrap.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'ecommerce/js/mdb.min.js' %}"></script>
+<script type="text/javascript">
+  /* WOW.js init */
+  new WOW().init();
+  // Tooltips Initialization
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  })
+  // Material Select Initialization
+  $(document).ready(function () {
+    $('.mdb-select').material_select();
+  });
+  // SideNav Initialization
+  $(".button-collapse").sideNav();
 
-    $('.reply-btn').click(function(){
-      $(this).parent().next('.replied-comments').fadeToggle()
-    });
+  $('.reply-btn').click(function(){
+    $(this).parent().next('.replied-comments').fadeToggle()
+  });
+  
+  $('.carousel').carousel()
 
-  </script>
+  $('.carousel').carousel({
+  interval: 2000
+})
+
+</script>

@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>Homepage</title>
+  <title>Accueil</title>
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
   <!-- Bootstrap core CSS -->
@@ -268,8 +268,7 @@
                     <h5 class="h5-responsive light-grey-text font-weight-bold mb-5">à tout moment !</h5>
                   </li>
                   <li>
-                    <a target="_blank" href="https://mdbootstrap.com/education/bootstrap/"
-                      class="btn btn-primary btn-rounded" rel="nofollow">Allons-y</a>
+                    <a href="#question1" class="btn btn-primary btn-rounded" >Allons-y</a>
                   </li>
                 </ul>
               </div>
@@ -320,7 +319,7 @@
       <nav class="navbar navbar-expand-lg navbar-dark primary-color mb-5">
         <div class="container">
           <!-- Navbar brand -->
-          <a class="font-weight-bold white-text mr-4" href="">Publications</a>
+          <a class="font-weight-bold white-text mr-4" >Publications</a>
           <!-- Collapse button -->
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent1"
             aria-controls="navbarSupportedContent1" aria-expanded="false" aria-label="Toggle navigation">
@@ -334,10 +333,10 @@
                 <a class="nav-link dropdown-toggle  no-caret" id="navbarDropdownMenuLink1" data-toggle="dropdown"
                   aria-haspopup="true" aria-expanded="false">Posez une question</a>
                 <div class="dropdown-menu mega-menu v-2 row z-depth-1 white" aria-labelledby="navbarDropdownMenuLink1">
-                  <div class="row mx-md-4 mx-1">
-                   <div class="col-md-8 col-xl-10 sub-menu my-xl-3 mt-10 mb-4">
-                      <h6 class="sub-title text-uppercase font-weight-bold blue-text">Question ?</h6>
-                      <form action="", method="POST" class="form-group row">
+                  <div class="row mx-md-4 mx-1" >
+                   <div class="col-md-8 col-xl-10 sub-menu my-xl-3 mt-10 mb-4" >
+                      <h6 class="sub-title text-uppercase font-weight-bold blue-text"  >Question ?</h6>
+                      <form action="" method="POST" class="form-group row" id="question1" >
                         {% csrf_token %}
                         <input type="text" name="question" placeholder="Votre question..."  style="height:100px; width:150%;" class="form-control form-control-lg" >
                         <input type="submit" name="repondre" value="Poster" class="btn  btn-primary">
@@ -345,26 +344,6 @@
                     </form>
                      
                     </div> 
-                    <!-- <div class="col-md-6 col-xl-3 sub-menu my-xl-5 mt-md-5 mt-4 mb-4">
-                      <h6 class="sub-title text-uppercase font-weight-bold blue-text">Sales</h6>
-                      <ul class="caret-style pl-0">
-                        <li class="">
-                          <a class="menu-item" href="">Laptops Up to 50% Off </a>
-                        </li>
-                        <li class="">
-                          <a class="menu-item" href="">Laptops under $399</a>
-                        </li>
-                        <li class="">
-                          <a class="menu-item" href="">Laptops Up to 50% Off</a>
-                        </li>
-                        <li class="">
-                          <a class="menu-item" href="">Laptops for designers</a>
-                        </li>
-                        <li class="">
-                          <a class="menu-item" href="">Laptops for developers</a>
-                        </li>
-                      </ul>
-                    </div> -->
                    </div>
                 </div>
               </li>
@@ -397,7 +376,7 @@
             <div class="col-lg-3 col-md-3 mb-3">
               <!-- Section: Categories -->
               <section class="my-5 text-center text-lg-left wow fadeIn" dtat-wow-delay="0.5s" style="visibility: visible; animation-name:fadeIn; animation-delay:0.5s;">
-                <h3 class="text-center my-5 h1">Posts récents</h3>
+                <h4 class="text-center my-5 h1" >Questions récentes</h4>
                 
                 {% for ask in q  %}
                   <div class="row mt-3">
@@ -413,7 +392,7 @@
                       <h4 class="mb-2"><strong > {{ask.question}} </strong></h4>
                       <p>
                         par 
-                        <a><strong>{{ask.eleve_id}}</strong></a>
+                        <a><strong>{{ask.eleve_id}}</strong></a><br/>
                         <span style="color:#717377;font-style:italic;">{{ask.eleve_id.classe}}-{{ask.eleve_id.genie}}</span>
                         <br><span style="font-size:11px;"> {{ask.date_question.day}}/{{ask.date_question.month}}/{{ask.date_question.year}}</span>
                         <a href="{% url 'repondre' pk=ask.pk  %}" class="btn btn-sm btn-primary waves-effect waves-light" style="padding: 5px;"> Réponses</a> 
@@ -430,8 +409,8 @@
             </div>
             <!-- Grid column -->
             <!-- Grid column -->
-           <div class="col-lg-8 col-md-8 ">
-            <h2>Documents Publiés</h2>
+           <div class="col-lg-8 col-md-7  ">
+            <h2> Documents Publiés</h2>
             
             <div class="col-lg-12 col-md-20 pb-lg-6 mb-4">
               <table class="table table-lg table-light table-striped">
@@ -465,26 +444,22 @@
               {% endfor %}
              </table>
 
-            </div>
-              <!-- Image -->
-               <!-- <div class="view zoom z-depth-1">
-                <img src="https://mdbootstrap.com/img/Photos/Others/product1.jpg" class="img-fluid" alt="sample image">
-                <div class="mask rgba-white-light">
-                  <div class="dark-grey-text  pt-4 ml-3 pl-3">
-                    <div>
-                      <a>
-                        <span class="badge badge-danger">bestseller</span>
-                      </a>
-                      <h2 class="card-title font-weight-bold pt-2">
-                        <strong>This is news title</strong>
-                      </h2>
-                      <p class="">Lorem ipsum dolor sit amet, consectetur adipisicing elit. </p>
-                      <a class="btn btn-danger btn-sm btn-rounded clearfix d-none d-md-inline-block">Read more</a>
-                    </div>
-                  </div>
+             <h1> Bonjour </h1>
+
+
+            <div class="col-lg-4 col-md-12 mb-4">
+              
+              <div class="card">
+                <div class="view overlay">
+                  <img src="" class="card-img-top">
+
                 </div>
-              </div>  -->
-              <!-- Image -->
+              </div>
+
+
+            </div>
+
+            </div>
             </div>
             <!-- Grid column -->
           </div>
@@ -495,26 +470,7 @@
         <section>
           <!-- Grid row -->
           <div class="row">
-            <!-- Grid column -->
-            <!--<div class="col-12">-->
-              <!-- Nav tabs -->
-              <!-- <ul class="nav md-tabs nav-justified grey lighten-3 mx-0" role="tablist">
-                <li class="nav-item">
-                  <a class="nav-link active dark-grey-text font-weight-bold" data-toggle="tab" href="#panel5"
-                    role="tab"> Bestsellers</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link dark-grey-text font-weight-bold" data-toggle="tab" href="#panel6" role="tab">Top
-                    offers</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link dark-grey-text font-weight-bold" data-toggle="tab" href="#panel7" role="tab">
-                    </i>Best rated</a>
-                </li>
-              </ul> -->
-              <!-- Tab panels -->
-             <!-- <div class="tab-content px-0">-->
-             <!-- </div>-->
+           
             </div>
           </div>
           <!-- Grid row -->
@@ -525,7 +481,8 @@
           <!-- Grid row -->
           <div class="row">
             <!-- Grid column -->
-            <div class="col-12">
+            <div class="col-lg-12 ">
+            
             </div>
             <!-- Grid column -->
           </div>

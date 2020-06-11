@@ -44,7 +44,7 @@ class QuestionForm(forms.ModelForm):
 
     
 class ReponseForm(forms.ModelForm):
-    reponse = forms.CharField(label="", widget =forms.Textarea(attrs={'class':'form-control', 'placeholder':'votre réponse...', 'rows':'3', 'cols':'5'}))
+    reponse = forms.CharField(label="", widget =forms.Textarea(attrs={'type':'text', 'class':'md-textarea form-control','id':'form-mess' ,'placeholder':'votre réponse...', 'rows':'3', 'cols':'55'}))
     class Meta:
         model = Reponse
         fields = ('reponse',)
