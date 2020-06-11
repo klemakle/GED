@@ -16,6 +16,8 @@ from .permis import nonauthentifie_user, allowed_users, compte_autorise
 
 
 
+
+
 #s'inscrire
 @nonauthentifie_user
 def inscrire(request):
@@ -76,10 +78,8 @@ def page_eleve(request):
     else :
         question_form = QuestionForm()
 
-
     context = {'Document':d, 'question':question_form, 'q':qst}
     return render(request, 'ged_app/user/page_user.html', context)
-
 
 
 
@@ -87,8 +87,6 @@ def page_eleve(request):
 def deconnecter(request):
     logout(request)
     return redirect('connecter')
-
-
 
 
 #page d'accueil pour l'admin
@@ -99,9 +97,7 @@ def page(request):
     return render(request, 'ged_app/admin_deconnecte.html', context)
 
 
-
-
-#Parametres du compte
+# controleur des Parametres du compte
 @login_required(login_url='connecter')
 @allowed_users(allowed_roles=['Eleve'])
 def user_param(request):
@@ -113,14 +109,12 @@ def user_param(request):
         if form.is_valid():
             form.save()
             return redirect('parametres')
+
     context = {'form':form}
     return render(request, 'ged_app/user/params_user.html', context)
 
 
 
-
-
- 
 
 
 # Publier un Document
@@ -140,7 +134,7 @@ def upload_doc(request):
     return render(request, 'ged_app/documents/upload_doc.html')
 
 
-
+#==================================================================================================================
 #voir la liste de tous les documents
 @login_required(login_url='connecter')
 def liste_doc(request):
@@ -148,16 +142,11 @@ def liste_doc(request):
     context = {'docs': doc}
     return render (request, 'ged_app/documents/liste_doc.html', context)
 
-
-
-
 @login_required(login_url='connecter')
 def doc_tc1(request):
     doc = Document.objects.filter(classe_doc = "TC1")
     context = {'docs' : doc}
     return render (request, 'ged_app/classe/doc_tc1.html', context)
-
-
 
 @login_required(login_url='connecter')
 def doc_tc2(request):
@@ -165,15 +154,11 @@ def doc_tc2(request):
     context = {'docs' : doc}
     return render (request, 'ged_app/classe/doc_tc2.html', context)
 
-
-
 @login_required(login_url='connecter')
 def doc_dic1(request):
     doc = Document.objects.filter(classe_doc = "DIC1")
     context = {'docs' : doc}
     return render (request, 'ged_app/classe/doc_dic1.html', context)
-
-
 
 @login_required(login_url='connecter')
 def doc_dic2(request):
@@ -181,17 +166,11 @@ def doc_dic2(request):
     context = {'docs' : doc}
     return render (request, 'ged_app/classe/doc_dic2.html', context)
 
-
-
 @login_required(login_url='connecter')
 def doc_dic3(request):
     doc = Document.objects.filter(classe_doc = "DIC3")
     context = {'docs' : doc}
     return render (request, 'ged_app/classe/doc_dic3.html', context)
-
-
-
-
 
 @login_required(login_url='connecter')
 def doc_gtc(request):
@@ -199,15 +178,11 @@ def doc_gtc(request):
     context = {'docs' : doc}
     return render (request, 'ged_app/genie/doc_gtc.html', context)
 
-
-
 @login_required(login_url='connecter')
 def doc_git(request):
     doc = Document.objects.filter(genie_doc = "GIT")
     context = {'docs' : doc}
     return render (request, 'ged_app/genie/doc_git.html', context)
-
-
 
 @login_required(login_url='connecter')
 def doc_gc(request):
@@ -215,17 +190,16 @@ def doc_gc(request):
     context = {'docs' : doc}
     return render (request, 'ged_app/genie/doc_gc.html', context)
 
-
-
 @login_required(login_url='connecter')
 def doc_gem(request):
     doc = Document.objects.filter(genie_doc = "Génie Electromécanique")
     context = {'docs' : doc}
     return render (request, 'ged_app/genie/doc_gem.html', context)
 
+#=============================================================================================================================
 
 
-
+#controleur du documents et de ses commentaires
 @login_required(login_url='connecter')
 def comments(request, pk):
     docs = Document.objects.get(id=int(pk))
@@ -254,24 +228,6 @@ def comments(request, pk):
 
 
 
-
-# @login_required(login_url='connecter')
-# def question(request):
-#     question_form = QuestionForm()
-#     if request.method == 'POST':
-#         question_form = QuestionForm(request.POST)
-#         content = request.POST.get('question')
-#         comm = Question.objects.create(eleve_id=request.user.eleve,question = content)
-#         comm.save()
-#         return redirect('')
-#     else :
-#         question_form = QuestionForm()
-#     context ={'question':question_form}
-#     return render ( request, 'ged_app/poser_question.html', context)
-
-
-
-
 #Controleur de reponses aux questions
 @login_required(login_url='connecter')
 def repondre(request, pk):
@@ -290,6 +246,27 @@ def repondre(request, pk):
 
     context = {'question': quest, 'rep_form':rep_form, 'reponse':rep}
     return render(request, 'ged_app/question/repondre.html', context)
+
+    
+
+# @login_required(login_url='connecter')
+# def question(request):
+#     question_form = QuestionForm()
+#     if request.method == 'POST':
+#         question_form = QuestionForm(request.POST)
+#         content = request.POST.get('question')
+#         comm = Question.objects.create(eleve_id=request.user.eleve,question = content)
+#         comm.save()
+#         return redirect('')
+#     else :
+#         question_form = QuestionForm()
+#     context ={'question':question_form}
+#     return render ( request, 'ged_app/poser_question.html', context)
+
+
+
+
+
 
 
 
